@@ -1,7 +1,7 @@
 package org.acme.application.usecase;
 
-import domain.model.Experiment;
-import domain.repository.ExperimentRepository;
+import org.acme.domain.model.Experiment;
+import org.acme.domain.repository.ExperimentRepository;
 
 import java.util.UUID;
 
@@ -18,4 +18,3 @@ public class CreateExperimentUseCase {
         return repository.save(experiment);
     }
 }
-
