@@ -4,18 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.acme.domain.model.Metric;
 import org.acme.domain.service.MetricRepository;
 
-import javax.enterprise.context.ApplicationScoped;
-import java.util.UUID;
+//import javax.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
-@RequiredArgsConstructor
+//@ApplicationScoped
+//@RequiredArgsConstructor
 public class RegisterMetricUseCase {
 
     private final MetricRepository metricRepository;
 
+    public RegisterMetricUseCase(MetricRepository repository) {
+        this.metricRepository = repository;
+    }
+
     public void execute(Metric metric) {
-        metric.setId(UUID.randomUUID());
         metricRepository.save(metric);
     }
 }
-

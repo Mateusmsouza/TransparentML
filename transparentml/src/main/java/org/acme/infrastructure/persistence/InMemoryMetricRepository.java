@@ -3,12 +3,10 @@ package org.acme.infrastructure.persistence;
 import org.acme.domain.model.Metric;
 import org.acme.domain.service.MetricRepository;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
 public class InMemoryMetricRepository implements MetricRepository {
 
     private final Map<UUID, Metric> store = new ConcurrentHashMap<>();
@@ -25,4 +23,3 @@ public class InMemoryMetricRepository implements MetricRepository {
                 .collect(Collectors.toList());
     }
 }
-
