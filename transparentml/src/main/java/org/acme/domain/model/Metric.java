@@ -13,6 +13,7 @@ public class Metric {
     private String experimentId;
     private String name;
     private double value;
+    private int step;
     private Instant timestamp;
 }
 

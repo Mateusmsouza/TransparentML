@@ -1,8 +1,8 @@
-package org.acme.application;
+package org.acme.application.usecase;
 
 import lombok.RequiredArgsConstructor;
 import org.acme.domain.model.Metric;
-import org.acme.domain.service.MetricRepository;
+import org.acme.domain.repository.MetricRepository;
 
 //import javax.enterprise.context.ApplicationScoped;
 
@@ -16,7 +16,7 @@ public class RegisterMetricUseCase {
         this.metricRepository = repository;
     }
 
-    public void execute(Metric metric) {
-        metricRepository.save(metric);
+    public Metric execute(Metric metric) {
+        return metricRepository.save(metric);
     }
 }

@@ -1,8 +1,9 @@
-package org.acme.adapters.in.rest;
+package org.acme.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.acme.application.RegisterMetricUseCase;
+
 import org.acme.infrastructure.persistence.InMemoryMetricRepository;
+import org.acme.application.usecase.RegisterMetricUseCase;
 import org.acme.domain.model.Metric;
 
 import io.quarkus.logging.Log;
@@ -13,19 +14,20 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("/metrics")
-public class MetricResource {
+public class MetricController {
 
     private final RegisterMetricUseCase useCase;
 
-    public MetricResource() {
+    public MetricController() {
         this.useCase = new RegisterMetricUseCase(new InMemoryMetricRepository());
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(Metric metric) {
-        // useCase.execute(metric);
         Log.info("register metric endpoints called");
-        return Response.status(Response.Status.CREATED).build();
+        Log.info(metric);
+        Metric createdMetric = useCase.execute(metric);
+        return Response.ok(createdMetric, MediaType.APPLICATION_JSON).status(Response.Status.CREATED).build();
     }
 }
