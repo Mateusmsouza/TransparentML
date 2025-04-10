@@ -7,6 +7,7 @@ import org.acme.application.usecase.RegisterMetricUseCase;
 import org.acme.domain.model.Metric;
 
 import io.quarkus.logging.Log;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;

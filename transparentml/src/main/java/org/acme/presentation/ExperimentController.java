@@ -1,34 +1,29 @@
 package org.acme.presentation;
+import java.util.Map;
 
-import lombok.RequiredArgsConstructor;
+import org.acme.application.usecase.CreateExperimentUseCase;
 
-import org.acme.infrastructure.persistence.InMemoryMetricRepository;
-import org.acme.application.usecase.RegisterMetricUseCase;
-import org.acme.domain.model.Metric;
+import org.acme.domain.model.Experiment;
 
 import io.quarkus.logging.Log;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-
 @Path("/experiments")
 public class ExperimentController {
     
-    //private final RegisterMetricUseCase useCase;
-
-    public ExperimentController() {
-        int a = 1+1;
-    }
+    @Inject
+    private CreateExperimentUseCase useCase;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response register(Metric metric) {
-        //Log.info("register metric endpoints called");
-        //Log.info(metric);
-        //Metric createdMetric = useCase.execute(metric);
-        return Response.ok(createdMetric, MediaType.APPLICATION_JSON).status(Response.Status.CREATED).build();
+    public Response create(Experiment experiment) {
+        Log.info("create experiment endpoints called");
+        String experiment_id = this.useCase.execute(experiment);
+        return Response.ok(Map.of("id", experiment_id), MediaType.APPLICATION_JSON).status(Response.Status.CREATED).build();
     }
 }

@@ -5,6 +5,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ExperimentRepository {
-    Experiment save(Experiment experiment);
+    String save(Experiment experiment);
     Optional<Experiment> findById(UUID id);
 }
