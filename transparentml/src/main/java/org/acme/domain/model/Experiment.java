@@ -9,6 +9,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class Experiment {
+    private String id;
     private String name;
     private String user;
     private String description;

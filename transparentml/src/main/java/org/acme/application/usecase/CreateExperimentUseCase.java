@@ -18,4 +18,8 @@ public class CreateExperimentUseCase {
         experiment.setCreatedAt(Instant.now());
         return repository.save(experiment);
     }
+
+    public Experiment findById(String id) {
+        return repository.findById(id).orElse(null);
+    }
 }

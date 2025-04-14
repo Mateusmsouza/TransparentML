@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.acme.domain.model.Experiment;
 import org.acme.domain.repository.ExperimentRepository;
 import org.bson.Document;
+import org.bson.types.ObjectId;
+import static com.mongodb.client.model.Filters.eq;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -32,11 +34,27 @@ public class MongoExperimentRepositoryImpl implements ExperimentRepository {
     }
 
     @Override
-    public Optional<Experiment> findById(UUID id) {
-        // Retrieve experiment from MongoDB by ID
-        return Optional.empty();
+    public Optional<Experiment> findById(String id) {
+        try {
+            ObjectId objectId = new ObjectId(id);
+            Document doc = this.getCollection().find(eq("_id", objectId)).first();
+
+            if (doc == null) {
+                return Optional.empty();
+            }
+
+            Experiment experiment = new Experiment();
+            experiment.setId(objectId.toHexString());
+            experiment.setName(doc.getString("name"));
+            experiment.setDescription(doc.getString("description"));
+            experiment.setCreatedAt(doc.getDate("createdAt").toInstant());
+            experiment.setTags(doc.getList("tags", String.class));
+            return Optional.of(experiment);
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
-    
+
     private MongoCollection getCollection(){
         return mongoClient.getDatabase("transparentml").getCollection("experiments");
     }
