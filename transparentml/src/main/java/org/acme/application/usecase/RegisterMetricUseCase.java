@@ -1,22 +1,22 @@
 package org.acme.application.usecase;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
+
 import org.acme.domain.model.Metric;
 import org.acme.domain.repository.MetricRepository;
 
-//import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-//@ApplicationScoped
-//@RequiredArgsConstructor
+
+@ApplicationScoped
 public class RegisterMetricUseCase {
 
-    private final MetricRepository metricRepository;
+    @Inject
+    private MetricRepository metricRepository;
 
-    public RegisterMetricUseCase(MetricRepository repository) {
-        this.metricRepository = repository;
-    }
-
-    public Metric execute(Metric metric) {
+    public String execute(Metric metric) {
+        metric.setCreatedAt(Instant.now());
         return metricRepository.save(metric);
     }
 }

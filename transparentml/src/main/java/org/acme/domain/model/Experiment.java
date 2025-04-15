@@ -14,5 +14,6 @@ public class Experiment {
     private String user;
     private String description;
     private List<String> tags;
+    private List<Metric> metrics;
     private Instant createdAt;
 }

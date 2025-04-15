@@ -8,10 +8,11 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class Metric {
+    private String id;
     private String experimentId;
     private String name;
     private double value;
     private int step;
-    private Instant timestamp;
+    private Instant createdAt;
 }
 
