@@ -4,8 +4,11 @@ import java.util.Map;
 import org.acme.application.usecase.CreateExperimentUseCase;
 
 import org.acme.domain.model.Experiment;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import io.quarkus.logging.Log;
+import io.quarkus.oidc.IdToken;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -21,7 +24,13 @@ public class ExperimentController {
     @Inject
     private CreateExperimentUseCase useCase;
 
+    @Inject
+    @IdToken
+    JsonWebToken idToken;
+
+
     @POST
+    @Authenticated
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(Experiment experiment) {
         Log.info("create experiment endpoints called");
@@ -30,11 +39,12 @@ public class ExperimentController {
     }
 
     @GET
+    @Authenticated
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response get_by_id(@PathParam ("id") String id) {
         Log.info("get experiment by id endpoint called");
-        Log.info(id);
+        Log.info(idToken.getTokenID());
         Experiment experiment = this.useCase.findById(id);
         //String experiment_id = this.useCase.execute(experiment);
         // Map.of("id", experiment_id)
