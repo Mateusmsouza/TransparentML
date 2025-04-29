@@ -20,7 +20,10 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/experiments")
 public class ExperimentController {
-    
+
+    @ConfigProperty(name = "env.local", defaultValue = "false")
+    boolean isLocal;
+
     @Inject
     private CreateExperimentUseCase useCase;
 
