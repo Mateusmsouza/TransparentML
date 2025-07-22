@@ -1,0 +1,24 @@
+version = 1
+revision = 2
+requires-python = ">=3.10"
+
+[[package]]
+name = "ruffus"
+version = "2.8.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3b/d1/154a08615b33bb66c37fa998490a811870355331b696140f125983890efa/ruffus-2.8.4.tar.gz", hash = "sha256:6cd3d96e459a1aedcc10341f14fddedfdc13664551757fcd429a241de63826aa", size = 12147217, upload-time = "2020-04-24T19:58:08.799Z" }
+
+[[package]]
+name = "transparentml"
+version = "0.1.0"
+source = { virtual = "." }
+
+[package.dev-dependencies]
+dev = [
+    { name = "ruffus" },
+]
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruffus", specifier = ">=2.8.4" }]
