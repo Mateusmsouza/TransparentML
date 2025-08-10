@@ -1,43 +1,31 @@
 services:
-  api:
-    build:
-      context: ./backend
-      dockerfile: ./Dockerfile
-    container_name: transparent-backend
-    develop:
-      watch:
-        - path: backend
-          action: sync+restart
-          target: /app
-    environment:
-      MONGODB_HOST: mongodb
-      MONGODB_USER: backend
-      MONGODB_PASSWD: passwd
-    ports:
-      - "8000:8000"
+  backend:
+    extends:
+      file: ./apps/backend/backend-compose.yaml
+      service: backend
 
-  mongodb:
-    image: mongo:6
-    container_name: mongodb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: backend
-      MONGO_INITDB_ROOT_PASSWORD: passwd
-    volumes:
-      - mongo_data:/data/db
-    ports:
-      - "27017:27017"
+  #mongodb:
+  #  image: mongo:6
+  #  container_name: mongodb
+  #  environment:
+  #    MONGO_INITDB_ROOT_USERNAME: backend
+  #    MONGO_INITDB_ROOT_PASSWORD: passwd
+  #  volumes:
+  #    - mongo_data:/data/db
+  #  ports:
+  #    - "27017:27017"
 
-  mongo-express:
-    image: mongo-express
-    container_name: mongo-express
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: backend
-      ME_CONFIG_MONGODB_ADMINPASSWORD: passwd
-      ME_CONFIG_MONGODB_SERVER: mongodb
-    ports:
-      - "8081:8081"
-    depends_on:
-      - mongodb
+  #mongo-express:
+  #  image: mongo-express
+  #  container_name: mongo-express
+  #  environment:
+  #    ME_CONFIG_MONGODB_ADMINUSERNAME: backend
+  #    ME_CONFIG_MONGODB_ADMINPASSWORD: passwd
+  #    ME_CONFIG_MONGODB_SERVER: mongodb
+  #  ports:
+  #    - "8081:8081"
+  #  depends_on:
+  #    - mongodb
 
 volumes:
   mongo_data:
