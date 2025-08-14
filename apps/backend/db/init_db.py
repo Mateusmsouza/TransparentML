@@ -1,4 +1,6 @@
-from pymongo import AsyncMongoClient, Document
+from pymongo import AsyncMongoClient
+
+from beanie import Document, Indexed, init_beanie
 
 async def init_db(client: AsyncMongoClient, models: list[Document]):
     client = AsyncMongoClient(

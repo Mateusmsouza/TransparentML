@@ -2,11 +2,11 @@ import logging
 
 from fastapi import FastAPI
 
-from pymongo import AsyncMongoClient, Document
+from pymongo import AsyncMongoClient
 
-from backend.db.init_db import init_db
-from backend.settings import settings
-from backend.model.experiment import Experiment
+from db.init_db import init_db
+from settings import settings
+from model.experiment import Experiment
 
 app = FastAPI(
     title="TransparentML Backend",

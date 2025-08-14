@@ -1,9 +1,13 @@
 FROM python:3.10-slim
 
+RUN pip install --no-cache-dir uv
+
 WORKDIR /app
-RUN pip install --upgrade uv
+
+COPY pyproject.toml uv.lock .
+
+RUN uv sync --no-dev 
 
 COPY . .
-RUN uv sync --frozen
 
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

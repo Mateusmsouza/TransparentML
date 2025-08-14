@@ -4,7 +4,7 @@ uv = "latest"
 
 [tasks.start]
 description = "start local dev environment"
-run = "docker-compose up --build --watch"
+run = "docker compose up --build --watch"
 
 [tasks."ci:lint:backend"]
 description = "run lint check on backend"
