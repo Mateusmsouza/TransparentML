@@ -4,28 +4,28 @@ services:
       file: ./apps/backend/backend-compose.yaml
       service: backend
 
-  #mongodb:
-  #  image: mongo:6
-  #  container_name: mongodb
-  #  environment:
-  #    MONGO_INITDB_ROOT_USERNAME: backend
-  #    MONGO_INITDB_ROOT_PASSWORD: passwd
-  #  volumes:
-  #    - mongo_data:/data/db
-  #  ports:
-  #    - "27017:27017"
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    env_file: "./apps/backend/.env"
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
 
-  #mongo-express:
-  #  image: mongo-express
-  #  container_name: mongo-express
-  #  environment:
-  #    ME_CONFIG_MONGODB_ADMINUSERNAME: backend
-  #    ME_CONFIG_MONGODB_ADMINPASSWORD: passwd
-  #    ME_CONFIG_MONGODB_SERVER: mongodb
-  #  ports:
-  #    - "8081:8081"
-  #  depends_on:
-  #    - mongodb
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    env_file: "./apps/backend/.env"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
 
 volumes:
   mongo_data:
+
+
+networks:
+  transparent-net:
+    external: true

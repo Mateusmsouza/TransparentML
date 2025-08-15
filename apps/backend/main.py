@@ -15,7 +15,9 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def start_db():
-    logging.info("starting mongodb")
+    logging.info(f"starting mongodb mongodb://{settings.mongodb_user}:{settings.mongodb_passwd}@{settings.mongodb_host} ")
+
+    f"mongodb://{settings.mongodb_user}:{settings.mongodb_passwd}@{settings.mongodb_host}"
     await init_db(
         client=AsyncMongoClient(
             f"mongodb://{settings.mongodb_user}:{settings.mongodb_passwd}@{settings.mongodb_host}"

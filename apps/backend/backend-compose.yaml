@@ -10,11 +10,9 @@ services:
           action: sync+restart
           target: /app
     env_file: ".env"
-    environment:
-      MONGODB_HOST: mongodb
-      MONGODB_USER: backend
-      MONGODB_PASSWD: passwd
     ports:
       - "8000:8000"
 
-
+networks:
+  transparent-net:
+    external: true
