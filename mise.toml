@@ -12,12 +12,12 @@ run = "docker compose watch"
 
 [tasks.destroy]
 description = "destroy local dev environment"
-run = "docker compose down"
+run = "docker compose apps/down"
 
 [tasks."ci:lint:backend"]
 description = "run lint check on backend"
-run = "uvx ruff check backend"
+run = "uvx ruff check apps/backend"
 
 [tasks."ci:unittest:backend"]
 description = "run unit testing on backend"
-run = "uvx pytest backend"
+run = "uvx pytest apps/backend"
