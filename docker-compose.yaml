@@ -1,9 +1,4 @@
 services:
-  backend:
-    extends:
-      file: ./apps/backend/backend-compose.yaml
-      service: backend
-
   mongodb:
     image: mongo:6
     container_name: mongodb
@@ -12,6 +7,13 @@ services:
       - mongo_data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - transparent-net
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --eval 'db.adminCommand(\"ping\")' --quiet"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   mongo-express:
     image: mongo-express
@@ -20,12 +22,23 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
+    networks:
+      - transparent-net
+
+  backend:
+    extends:
+      file: ./apps/backend/backend-compose.yaml
+      service: backend
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - transparent-net
 
 volumes:
   mongo_data:
 
-
 networks:
   transparent-net:
-    external: true

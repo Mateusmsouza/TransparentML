@@ -4,7 +4,15 @@ uv = "latest"
 
 [tasks.start]
 description = "start local dev environment"
-run = "docker compose up --build --watch"
+run = "docker compose up --build -d"
+
+[tasks.watch_app]
+description = "activate compose watch mode/hot-reload"
+run = "docker compose watch"
+
+[tasks.destroy]
+description = "destroy local dev environment"
+run = "docker compose down"
 
 [tasks."ci:lint:backend"]
 description = "run lint check on backend"
