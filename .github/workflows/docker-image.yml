@@ -7,12 +7,27 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
+    # Login no GitHub Container Registry
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    # Build da imagem
     - name: Build transparent backend docker image
-      run: docker build apps/backend --file apps/backend/Dockerfile --tag transparent-backend:$(date +%s)
+      run: |
+        IMAGE_TAG=ghcr.io/${{ github.repository_owner }}/transparent-backend:$(date +%s)
+        docker build apps/backend --file apps/backend/Dockerfile --tag $IMAGE_TAG
+
+    # Push da imagem para o GHCR
+    - name: Push transparent backend docker image
+      run: docker push $IMAGE_TAG
