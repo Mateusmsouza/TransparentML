@@ -1,10 +1,11 @@
-from beanie import Document
+from beanie import Document, PydanticObjectId
+from pydantic import Field
 
 
 class MetricDocument(Document):
-    id: str
+    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     name: str
-    value: str
+    value: float
     step: int
 
     class Settings:
@@ -12,10 +13,11 @@ class MetricDocument(Document):
 
 
 class ExperimentDocument(Document):
+    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     name: str
     description: str
-    tags: list[str]
-    metrics: list[MetricDocument]
+    tags: list[str] = Field(default_factory=list)
+    metrics: list[MetricDocument] = Field(default_factory=list)
 
     class Settings:
         name = "experiments"

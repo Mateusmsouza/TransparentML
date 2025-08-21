@@ -6,5 +6,7 @@ from infraestructure.models import ExperimentDocument
 class BeanieExperimentRepository(ExperimentRepositoryInterface):
 
     async def save(self, experiment: Experiment) -> str:
-        document = ExperimentDocument(**Experiment.model_dump())
-        return await document.insert()
+        document = ExperimentDocument(**experiment.model_dump())
+        result = await document.insert()
+        uuid = str(result.id)
+        return uuid

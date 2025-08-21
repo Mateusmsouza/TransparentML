@@ -1,4 +1,4 @@
-from typiing import Protocol, Optional
+from typing import Protocol, Optional
 from domain.entities import Experiment
 
 
