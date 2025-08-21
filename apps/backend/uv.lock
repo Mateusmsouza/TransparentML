@@ -310,12 +310,6 @@ wheels = [
 ]
 
 [[package]]
-name = "ruffus"
-version = "2.8.4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/3b/d1/154a08615b33bb66c37fa998490a811870355331b696140f125983890efa/ruffus-2.8.4.tar.gz", hash = "sha256:6cd3d96e459a1aedcc10341f14fddedfdc13664551757fcd429a241de63826aa", size = 12147217, upload-time = "2020-04-24T19:58:08.799Z" }
-
-[[package]]
 name = "sniffio"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
@@ -344,27 +338,21 @@ source = { virtual = "." }
 dependencies = [
     { name = "beanie" },
     { name = "fastapi" },
+    { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "pymongo" },
     { name = "uvicorn" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "ruffus" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "beanie", specifier = ">=2.0.0" },
     { name = "fastapi", specifier = ">=0.116.1" },
+    { name = "pydantic", specifier = ">=2.11.7" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "pymongo", specifier = ">=4.14.0" },
     { name = "uvicorn", specifier = ">=0.35.0" },
 ]
-
-[package.metadata.requires-dev]
-dev = [{ name = "ruffus", specifier = ">=2.8.4" }]
 
 [[package]]
 name = "typing-extensions"
