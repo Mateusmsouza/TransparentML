@@ -29,5 +29,10 @@ jobs:
         docker build apps/backend --file apps/backend/Dockerfile --tag $IMAGE_TAG
 
     # Push da imagem para o GHCR
-    - name: Push transparent backend docker image
-      run: docker push $IMAGE_TAG
+    - name: Build and push transparent backend docker image
+      run: |
+        IMAGE_TAG=ghcr.io/$(echo $GITHUB_REPOSITORY_OWNER | tr '[:upper:]' '[:lower:]')/transparent-backend:$(date +%s)
+        echo "Using image tag: $IMAGE_TAG"
+        docker build apps/backend --file apps/backend/Dockerfile --tag $IMAGE_TAG
+        docker push $IMAGE_TAG
+
