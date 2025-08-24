@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: transparent-backend
-          image: ghcr.io/mateusmsouza/transparent-backend:latest
+          image: ghcr.io/mateusmsouza/transparent-backend:1756030963
           ports:
           - containerPort: 8000
       imagePullSecrets:
