@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transparent-backend
+  namespace: default
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: transparent-backend
+  template:
+    metadata:
+      labels:
+        app: transparent-backend
+    spec:
+      containers:
+        - name: transparent-backend
+          image: ghcr.io/mateusmsouza/transparent-backend:latest
+          ports:
+          - containerPort: 8000
+      imagePullSecrets:
+        - name: ghcr-secret
