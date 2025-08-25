@@ -18,5 +18,8 @@ spec:
           image: ghcr.io/mateusmsouza/transparent-backend:1756030963
           ports:
           - containerPort: 8000
+      envFrom:
+        - secretRef:
+            name: mongodb-secret
       imagePullSecrets:
         - name: ghcr-secret
