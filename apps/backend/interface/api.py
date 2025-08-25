@@ -10,7 +10,7 @@ from settings import settings
 from infraestructure.models import ExperimentDocument, MetricDocument
 from infraestructure.mongo_repository import BeanieExperimentRepository
 from application.experiment_service import ExperimentService
-from domain.entities import Experiment 
+from domain.entities import Experiment
 
 app = FastAPI(
     title="TransparentML Backend",
@@ -19,12 +19,10 @@ app = FastAPI(
 
 experiment_service = ExperimentService(repository=BeanieExperimentRepository())
 
+
 @app.on_event("startup")
 async def start_db():
-    uri = f"mongodb://{settings.mongodb_user}:" \
-        f"{settings.mongodb_passwd}@{settings.mongodb_host}"
-    logging.info(uri)
-    logging.info(settings)
+    uri = settings.mongodb_uri
     logging.info(f"starting mongodb {uri}")
     await init_db(
         client=AsyncMongoClient(uri),
@@ -35,6 +33,7 @@ async def start_db():
 @app.get("/ping")
 async def root():
     return {"message": "Pong"}
+
 
 @app.post("/v1/experiment")
 async def create_experiment(experiment: Experiment) -> str:
