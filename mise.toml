@@ -20,4 +20,6 @@ run = "uvx ruff check apps/backend"
 
 [tasks."ci:unittest:backend"]
 description = "run unit testing on backend"
-run = "uvx pytest apps/backend"
+run = "uv run pytest"
+dir ="./apps/backend/"
+
