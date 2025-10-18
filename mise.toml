@@ -12,7 +12,7 @@ run = "docker compose watch"
 
 [tasks.destroy]
 description = "destroy local dev environment"
-run = "docker compose apps/down"
+run = "docker compose -v down"
 
 [tasks."ci:lint:backend"]
 description = "run lint check on backend"

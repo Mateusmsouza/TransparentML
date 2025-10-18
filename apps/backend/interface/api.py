@@ -36,6 +36,6 @@ async def root():
 
 
 @app.post("/v1/experiment")
-async def create_experiment(experiment: Experiment) -> str:
+async def create_experiment(experiment: Experiment) -> JSONResponse:
     uuid = await experiment_service.create(experiment=experiment)
     return JSONResponse(content={"_id": uuid}, status_code=status.HTTP_201_CREATED)
