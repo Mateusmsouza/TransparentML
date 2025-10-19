@@ -1,9 +1,9 @@
-from application.experiment_service import ExperimentRepositoryInterface
-from domain.entities import Experiment
+from application.metric_service import MetricRepositoryInterface
+from domain.entities import Metric
 from infraestructure.models import ExperimentDocument
 
 
-class BeanieExperimentRepository(ExperimentRepositoryInterface):
+class MongoExperimentRepository(ExperimentRepositoryInterface):
 
     async def save(self, experiment: Experiment) -> str:
         document = ExperimentDocument(**experiment.model_dump())

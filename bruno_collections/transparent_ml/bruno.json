@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "transparent_ml",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

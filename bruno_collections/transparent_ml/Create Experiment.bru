@@ -1,0 +1,28 @@
+meta {
+  name: Create Experiment
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:8000/v1/experiment
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "foobar",
+    "description": "foobar stuff",
+    "tags": [
+      "good",
+      "bad"
+    ],
+    "metrics": []
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
